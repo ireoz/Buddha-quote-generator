@@ -3,6 +3,8 @@ let apiBuddhaQuotes = [];
 const quoteE = document.querySelector('#quote');
 const authorE = document.querySelector('#author');
 const tweetButton = document.querySelector('#twitter');
+const loader = document.querySelector('#loader');
+const quoteContainer = document.querySelector('#quote-container');
 
 
 // Show New Quote
@@ -13,10 +15,12 @@ const quote = apiBuddhaQuotes[Math.floor(Math.random() * apiBuddhaQuotes.length)
 quote.text.length > 80 ? quoteE.classList.add('long-quote'): quoteE.classList.remove('long-quote');
 quoteE.innerHTML = quote.text;
 authorE.innerHTML = quote.author;
+complete();
 }
 
 // Get quotes from API
 async function getQuotes() {
+    showLoader()
     const apiURL = 'https://type.fit/api/quotes';
     try {
         const response = await fetch(apiURL);
@@ -38,6 +42,20 @@ window.open(tweetURL, '_blank');
 
 // add listener event
 tweetButton.addEventListener('click', createTweet);
+
+
+// hide loader
+function showLoader() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+
+// show loader
+
+function complete() {
+    loader.hidden = true;
+    quoteContainer.hidden = false;
+}
 
 // 
 getQuotes();
