@@ -2,6 +2,7 @@ let apiQuotes = [];
 let apiBuddhaQuotes = [];
 const quoteE = document.querySelector('#quote');
 const authorE = document.querySelector('#author');
+const tweetButton = document.querySelector('#twitter');
 
 
 // Show New Quote
@@ -28,6 +29,15 @@ async function getQuotes() {
     }
 }
 
+
+// post a tweet
+function createTweet() {
+const tweetURL = `https://twitter.com/intent/tweet?text=${quoteE.innerHTML} - ${authorE.innerHTML}`;
+window.open(tweetURL, '_blank');
+}
+
+// add listener event
+tweetButton.addEventListener('click', createTweet);
 
 // 
 getQuotes();
